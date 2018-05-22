@@ -1,0 +1,17 @@
+version: '2'
+services:
+
+  php:
+    build: php
+    ports:
+      - 8080:80
+    volumes:
+      - ./www-data/:/var/www/html
+    links:
+      - db
+  db:
+    build: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=senha
+    volumes:
+      - ./data/mysql:/var/lib/mysql
