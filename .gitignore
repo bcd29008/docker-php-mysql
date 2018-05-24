@@ -1,3 +1,5 @@
+# diretório onde ficará os dados do MySQL
+data/
 
 # Created by https://www.gitignore.io/api/macos
 

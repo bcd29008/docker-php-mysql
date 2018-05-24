@@ -9,12 +9,27 @@ Aqui tem um simples exemplo (em *container* Docker) de como usar o PHP para aces
 #### Exemplo de *prepared statement* em PHP:
 
  ```php
+// Exemplo com INSERT
 $stmt = $conexao->prepare("INSERT INTO Contato (nome, email) VALUES (?,?)");
-$stmt->bind_param("ss", $nome, $email);
+$stmt->bind_param("ss", $nome, $email); 
 $nome = "juca";
 $email = "j@ifsc";
 $stmt->execute();
 $stmt->close();
+
+// Exemplo com SELECT
+$cID = 10;
+$stmt = $conexao->prepare("SELECT * FROM Contato WHERE cID = ?");
+// argumentos podem ser i, d, s, b (integer, double, string ou blob) 
+$stmt->bind_param("i", $cID);
+$stmt->execute();
+$resultado = $stmt->get_result();
+
+while ($linha = $resultado->fetch_assoc()){
+    echo $linha['nome'];
+}
+$stmt->close();
+$resultado->close();
  ```
 
 
